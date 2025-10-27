@@ -7,7 +7,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.Session;
 
 @Entity
 @Table(name = "attempts")
@@ -15,7 +14,7 @@ import org.hibernate.Session;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class AttemptsModel {
+public class AttemptModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,7 +34,7 @@ public class AttemptsModel {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "route_id")
     @JsonIgnoreProperties({"setter"})
-    private RoutesModel routes;
+    private RouteModel routes;
 
     private int attemptTime;
     @Column(columnDefinition = "TEXT")

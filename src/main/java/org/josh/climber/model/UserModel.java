@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -27,13 +28,15 @@ public class UserModel {
     private LocalDateTime createdAt;
 
     /* FK */
+    @Builder.Default
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     @JsonManagedReference
-    private List<SessionModel> sessions;
+    private List<SessionModel> sessions = new ArrayList<>();
 
+    @Builder.Default
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     @JsonManagedReference
-    private List<AttemptsModel> attempts;
+    private List<AttemptModel> attempts = new ArrayList<>();
 
 
 

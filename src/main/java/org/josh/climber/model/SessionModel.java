@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -29,9 +30,15 @@ public class SessionModel {
     @JsonIgnoreProperties({"sessions", "bio", "createdAt"})
     private UserModel user;
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "gym_id")
+    @JsonIgnoreProperties({"location", "latitude", "longitude"})
+    private GymModel gym;
+
+    @Builder.Default
     @OneToMany(mappedBy = "session", fetch = FetchType.LAZY)
     @JsonManagedReference
-    private List<AttemptsModel> attempts;
+    private List<AttemptModel> attempts = new ArrayList<>();
 
     private LocalDateTime sessionDate;
     private int durationMinutes;
@@ -39,6 +46,5 @@ public class SessionModel {
     private String notes;
     private LocalDateTime createdAt;
 
-    /* TODO */
-    // Add gym id later
+
 }
