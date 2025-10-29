@@ -2,6 +2,7 @@ package org.josh.climber.controller;
 
 import org.josh.climber.model.RouteModel;
 import org.josh.climber.repository.RouteRepository;
+import org.josh.climber.service.RouteService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -10,19 +11,19 @@ import java.util.List;
 @RequestMapping("/api/routes")
 public class RouteController {
 
-    private final RouteRepository repo;
+    private final RouteService routeService;
 
-    public RouteController(RouteRepository repo) {
-        this.repo = repo;
+    public RouteController(RouteService routeService) {
+        this.routeService = routeService;
     }
 
     @GetMapping
     public List<RouteModel> getAllRoutes(){
-        return repo.findAll();
+        return routeService.getAllRoutes();
     }
 
     @PostMapping
     public RouteModel createRoute(@RequestBody RouteModel route){
-        return repo.save(route);
+        return routeService.createRoute(route);
     }
 }
