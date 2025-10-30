@@ -11,3 +11,9 @@ export async function getUsers(){
     if(!res.ok) throw new Error("Failed to get users.");
     return await res.json();
 }
+
+export async function getRoute(){
+    const res = await fetch(`${API_BASE_URL}/routes`);
+    if(!res.ok) throw new Error("Failed to get route.");
+    return await res.json();
+}
