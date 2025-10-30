@@ -23,7 +23,7 @@ public class RouteModel {
     // PK
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long routeId;
+    private Long routeId;
     private String name;
     private String grade;
     private String style;

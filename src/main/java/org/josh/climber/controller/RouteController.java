@@ -1,5 +1,6 @@
 package org.josh.climber.controller;
 
+import org.josh.climber.DTO.RouteDTO;
 import org.josh.climber.model.RouteModel;
 import org.josh.climber.repository.RouteRepository;
 import org.josh.climber.service.RouteService;
@@ -17,8 +18,13 @@ public class RouteController {
         this.routeService = routeService;
     }
 
+    @GetMapping("/{routeId}")
+    public RouteDTO findByRouteId(@PathVariable Long routeId){
+        return routeService.findByRouteId(routeId);
+    }
+
     @GetMapping
-    public List<RouteModel> getAllRoutes(){
+    public List<RouteDTO> getAllRoutes(){
         return routeService.getAllRoutes();
     }
 
