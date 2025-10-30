@@ -11,6 +11,7 @@ public class RouteDTOMapper {
         return new RouteDTO(
                 route.getRouteId(),
                 route.getName(),
+                route.getIsOutdoor(),
                 route.getGrade(),
                 route.getStyle(),
                 route.getSetter(),
@@ -21,6 +22,7 @@ public class RouteDTOMapper {
     public RouteModel toEntity(RouteDTO dto) {
         return RouteModel.builder()
                 .name(dto.name())
+                .isOutdoor(dto.isOutdoor())
                 .grade(dto.grade())
                 .style(dto.style())
                 .setter(dto.setter())

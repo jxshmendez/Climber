@@ -42,7 +42,7 @@ public class RouteModel {
     private GymModel gym;
 
     // Validation Methods
-    private boolean isOutdoor;
+    private Boolean isOutdoor;
     @AssertTrue(message="Only outdoor routes can have names")
     private boolean isValidNameCondition() {
         return (isOutdoor && name != null && !name.isBlank())
