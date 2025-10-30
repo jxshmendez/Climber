@@ -1,5 +1,7 @@
 package org.josh.climber.service;
 
+import org.josh.climber.DTO.UserDTO;
+import org.josh.climber.DTOMapper.UserDTOMapper;
 import org.josh.climber.model.UserModel;
 import org.josh.climber.repository.UserRepository;
 import org.springframework.stereotype.Service;
@@ -11,17 +13,24 @@ import java.util.List;
 public class UserService {
 
     private final UserRepository userRepo;
+    private final UserDTOMapper mapper;
 
-    public UserService(UserRepository userRepo) {
+    public UserService(UserRepository userRepo, UserDTOMapper mapper) {
         this.userRepo = userRepo;
+        this.mapper = mapper;
     }
 
-    public List<UserModel> getAllUsers(){
-        return userRepo.findAll();
+    public List<UserDTO> getAllUsers(){
+        return userRepo.findAll()
+                .stream()
+                .map(mapper::toDTO)
+                .toList();
     }
 
-    public UserModel findByUsername(String username){
-        return userRepo.findByUsername(username);
+    public UserDTO findByUsername(String username){
+        UserModel user = userRepo.findByUsername(username)
+                .orElseThrow(() -> new RuntimeException("User not found: " + username));
+        return mapper.toDTO(user);
     }
 
     public UserModel createUser(UserModel user){

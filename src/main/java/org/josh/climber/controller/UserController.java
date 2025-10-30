@@ -1,5 +1,6 @@
 package org.josh.climber.controller;
 
+import org.josh.climber.DTO.UserDTO;
 import org.josh.climber.model.UserModel;
 import org.josh.climber.service.UserService;
 import org.springframework.web.bind.annotation.*;
@@ -17,13 +18,12 @@ public class UserController {
     }
 
     @GetMapping
-    public List<UserModel> getAllUsers(){
+    public List<UserDTO> getAllUsers(){
         return userService.getAllUsers();
     }
 
-    @GetMapping
-    @RequestMapping("/{username}")
-    public UserModel findByUsername(@PathVariable String username ){
+    @GetMapping("/{username}")
+    public UserDTO findByUsername(@PathVariable String username ){
         return userService.findByUsername(username);
     }
 
