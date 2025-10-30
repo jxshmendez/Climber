@@ -23,7 +23,7 @@ public class RouteModel {
     // PK
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long routeId;
+    private Long routeId;
     private String name;
     private String grade;
     private String style;
@@ -32,8 +32,8 @@ public class RouteModel {
 
     /* FK */
     @Builder.Default
-    @OneToMany(mappedBy = "routes", fetch = FetchType.LAZY)
-    @JsonManagedReference
+    @OneToMany(mappedBy = "routes", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference("route-attempt")
     private List<AttemptModel> attempts = new ArrayList<>();
 
     @ManyToOne(fetch = FetchType.EAGER)

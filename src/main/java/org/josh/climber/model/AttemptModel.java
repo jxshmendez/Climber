@@ -1,6 +1,7 @@
 package org.josh.climber.model;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -19,29 +20,29 @@ public class AttemptModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long attemptId;
+    private int attemptTime;
+    @Column(columnDefinition = "TEXT")
+    private String notes;
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private ResultType result;
 
     /* FK */
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
-    @JsonIgnoreProperties({"sessions", "bio", "createdAt"})
+    @JsonBackReference("user-attempt")
     private UserModel user;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "session_id")
-    @JsonIgnoreProperties({"notes", "createdAt"})
+    @JsonBackReference("attempt-session")
     private SessionModel session;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "route_id")
-    @JsonIgnoreProperties({"setter"})
+    @JsonBackReference("route-attempt")
     private RouteModel routes;
 
-    private int attemptTime;
-    @Column(columnDefinition = "TEXT")
-    private String notes;
 
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private ResultType result;
 
 }

@@ -1,5 +1,7 @@
 package org.josh.climber.controller;
 
+import jakarta.validation.Valid;
+import org.josh.climber.DTO.RouteDTO;
 import org.josh.climber.model.RouteModel;
 import org.josh.climber.repository.RouteRepository;
 import org.josh.climber.service.RouteService;
@@ -17,13 +19,28 @@ public class RouteController {
         this.routeService = routeService;
     }
 
+    @GetMapping("/{routeId}")
+    public RouteDTO findByRouteId(@PathVariable Long routeId){
+        return routeService.findByRouteId(routeId);
+    }
+
     @GetMapping
-    public List<RouteModel> getAllRoutes(){
+    public List<RouteDTO> getAllRoutes(){
         return routeService.getAllRoutes();
     }
 
     @PostMapping
-    public RouteModel createRoute(@RequestBody RouteModel route){
+    public RouteDTO createRoute(@Valid @RequestBody RouteDTO route){
         return routeService.createRoute(route);
+    }
+
+    @PutMapping("/{routeId}")
+    public RouteDTO updateRoute(@PathVariable Long routeId, @Valid @RequestBody RouteDTO route){
+        return routeService.updateRoute(routeId, route);
+    }
+
+    @DeleteMapping("/{routeId}")
+    public void deleteRoute(@PathVariable Long routeId){
+        routeService.deleteRoute(routeId);
     }
 }

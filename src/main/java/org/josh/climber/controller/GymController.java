@@ -1,14 +1,17 @@
 package org.josh.climber.controller;
 
+import jakarta.validation.Valid;
+import org.josh.climber.DTO.GymDTO;
+import org.josh.climber.DTO.RouteDTO;
 import org.josh.climber.model.GymModel;
 import org.josh.climber.service.GymService;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Controller
+@RestController
+@RequestMapping("/api/gyms")
 public class GymController {
 
     private final GymService gymService;
@@ -17,14 +20,33 @@ public class GymController {
         this.gymService = gymService;
     }
 
+    @GetMapping("/{gymId}")
+    public GymDTO findByGymId(@PathVariable Long gymId){
+        return gymService.findByGymId(gymId);
+    }
+
     @GetMapping
-    public List<GymModel> getAllGyms(){
+    public List<GymDTO> getAllGyms(){
         return gymService.getAllGyms();
     }
 
+    @GetMapping("/{gymId}/routes")
+    public List<RouteDTO> getRoutesByGym(@PathVariable Long gymId){
+        return gymService.getRoutesByGymId(gymId);
+    }
+
     @PostMapping
-    public GymModel createGym(GymModel gym){
+    public GymDTO createGym(@Valid @RequestBody GymDTO gym){
         return gymService.createGym(gym);
     }
 
+    @PutMapping("/{gymId}")
+    public GymDTO updateGym(@PathVariable Long gymId, @Valid @RequestBody GymDTO gym){
+        return gymService.updateGym(gymId, gym);
+    }
+
+    @DeleteMapping("/{gymId}")
+    public void deleteGym(@PathVariable Long gymId){
+        gymService.deleteGym(gymId);
+    }
 }

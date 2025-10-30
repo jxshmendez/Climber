@@ -1,7 +1,11 @@
 package org.josh.climber.controller;
 
+import jakarta.validation.Valid;
+import org.josh.climber.DTO.AttemptDTO;
+import org.josh.climber.DTO.SessionDTO;
 import org.josh.climber.model.SessionModel;
 import org.josh.climber.service.SessionService;
+import org.josh.climber.service.UserService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -11,18 +15,40 @@ import java.util.List;
 public class SessionController {
 
     private final SessionService sessionService;
+    private final UserService userService;
 
-    public SessionController(SessionService sessionService) {
+    public SessionController(SessionService sessionService, UserService userService) {
         this.sessionService = sessionService;
+        this.userService = userService;
     }
 
     @GetMapping
-    public List<SessionModel> getAllSessions(){
+    public List<SessionDTO> getAllSessions(){
         return sessionService.getAllSessions();
     }
 
+    @GetMapping("/{sessionId}")
+    public SessionDTO findBySessionId(@PathVariable Long sessionId){
+        return sessionService.findBySessionId(sessionId);
+    }
+
+    @GetMapping("/{sessionId}/attempts")
+    public List<AttemptDTO> getAttemptsBySessionId(@PathVariable Long sessionId){
+        return sessionService.getAttemptsBySessionId(sessionId);
+    }
+
     @PostMapping
-    public SessionModel createSession(@RequestBody SessionModel session){
+    public SessionDTO createSession(@RequestBody SessionDTO session){
         return sessionService.createSession(session);
+    }
+
+    @PutMapping("/{sessionId}")
+    public SessionDTO updateSession(@PathVariable Long sessionId, @Valid @RequestBody SessionDTO session){
+        return sessionService.updateService(sessionId, session);
+    }
+
+    @DeleteMapping("/{sessionId}")
+    public void deleteSession(@PathVariable Long sessionId){
+        sessionService.deleteSession(sessionId);
     }
 }

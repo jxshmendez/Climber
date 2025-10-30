@@ -1,7 +1,8 @@
 package org.josh.climber.controller;
 
+import jakarta.validation.Valid;
+import org.josh.climber.DTO.AttemptDTO;
 import org.josh.climber.model.AttemptModel;
-import org.josh.climber.repository.AttemptRepository;
 import org.josh.climber.service.AttemptService;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,13 +18,28 @@ public class AttemptController {
         this.attemptService = attemptService;
     }
 
+    @GetMapping("/{attemptId}")
+    public AttemptDTO findByAttemptId(@PathVariable Long attemptId){
+        return attemptService.findByAttemptId(attemptId);
+    }
+
     @GetMapping
-    public List<AttemptModel> getAllAttempts(){
+    public List<AttemptDTO> getAllAttempts(){
         return attemptService.getAllAttempts();
     }
 
     @PostMapping
-    public AttemptModel createAttempt(@RequestBody AttemptModel attempt){
+    public AttemptDTO createAttempt(@Valid @RequestBody AttemptDTO attempt){
         return attemptService.createAttempt(attempt);
+    }
+
+    @PutMapping("/{attemptId}")
+    public AttemptDTO updateAttempt(@PathVariable Long attemptId, @Valid @RequestBody AttemptDTO attempt){
+        return attemptService.updateAttempt(attemptId, attempt);
+    }
+
+    @DeleteMapping("/{attemptId}")
+    public void deleteAttempt(@PathVariable Long attemptId){
+        attemptService.deleteAttempt(attemptId);
     }
 }
