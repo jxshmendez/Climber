@@ -2,25 +2,27 @@ import { NavLink } from "react-router-dom";
 
 export default function Navbar() {
     const linkClasses = ({ isActive }) =>
-        isActive ? "text-[#CBD081]" : "text-black";
+        isActive ? "text-[#E35335]" : "text-black";
 
     return (
-        <nav className="w-full flex items-center justify-between p-4 bg-[#FAF9F6] text-black">
-            {/* Left side links */}
-            <div className="flex gap-6">
-                <NavLink to="/" className={linkClasses}>Home</NavLink>
-                <NavLink to="/gyms" className={linkClasses}>Gyms</NavLink>
-                <NavLink to="/users" className={linkClasses}>Users</NavLink>
-                <NavLink to="/routes" className={linkClasses}>Routes</NavLink>
-            </div>
+        <nav className="noto-sans-display text-xl w-full bg-[#fef6e0] text-black p-4 border-b border-transparent">
+            <div className="flex items-center justify-between border-b border-[#ff5317] w-[97%] mx-auto pb-3">
+                <div className="flex gap-10">
+                    <NavLink to="/" className={linkClasses}>Home</NavLink>
+                    <NavLink to="/gyms" className={linkClasses}>Gyms</NavLink>
+                    <NavLink to="/users" className={linkClasses}>Users</NavLink>
+                    <NavLink to="/routes" className={linkClasses}>Routes</NavLink>
+                </div>
 
-            {/* Right side button */}
-            <NavLink
-                to="/join"
-                className="border border-[#CBD081] text-[#CBD081] px-7 py-1.5 rounded-md
-                hover:bg-[#CBD081]
-                hover:text-gray-900 transition"
-            >Join</NavLink>
+                <h1 className="anton-sc-regular text-5xl text-[#3256d2] absolute left-1/2 transform -translate-x-1/2 font-bold tracking-wide">
+                    WALL
+                </h1>
+
+                <NavLink
+                    to="/waitlist"
+                    className="bg-[#ff5317] text-black px-4 py-1.5 rounded-md">Waitlist
+                </NavLink>
+            </div>
         </nav>
     );
 }
