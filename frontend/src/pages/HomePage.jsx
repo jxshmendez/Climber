@@ -5,7 +5,9 @@ export default function HomePage() {
                 Climbing Social
             </h1>
             <h1 className={"text-6xl font-bold"}>
-                <span className="text-[#CBD081] p-2">For those who live on the wall</span>
+                <span className="text-[#CBD081] p-2">For those who live on the
+                </span>
+                <span className="text-[#CBD081]">wall</span>
             </h1>
             <p className="mt-2 text-gray-700 font-bold pb-8">Built for climbers, by climbers</p>
 
