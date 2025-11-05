@@ -1,40 +1,36 @@
 import {useState} from "react";
 import axios from "axios";
 import {useNavigate} from "react-router-dom";
-import{useAuth} from "../context/AuthContext";
 
-export default function LoginPage(){
-    const {login} = useAuth();
+export default function RegisterPage() {
     const navigate = useNavigate();
     const [formData, setFormData] = useState({
         username: "",
+        email: "",
         password: ""
     });
 
     const [message, setMessage] = useState("");
 
     const handleChange = (e) => {
-        setFormData({...formData, [e.target.name]: e.target.value});
+        setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         try{
-            const res = await axios.post("/api/auth/login", formData);
-            const token = res.data.token;
-            login(token);
-            setMessage(res.data.message || "Login Successful");
+            const res = await axios.post("/api/auth/register", formData);
+            setMessage(res.data.message  || "Registration Successful");
 
-            setTimeout(() => navigate("/dashboard"),1000);
-
+            setTimeout(() => navigate("/login"), 1500);
         } catch (err){
-            setMessage(err.response?.data || "Login Failed")
+            setMessage(err.response?.data || "Registration Failed");
         }
     };
 
     return(
         <section className={"min-h-screen flex flex-col justify-center items-center bg-[#fef6e0] text-black p-6"}>
-            <h1 className={"text-6xl anton-sc-regular mb-10 text-[#ff5317]"}>LOGIN</h1>
+            <h1 className={"text-6xl anton-sc-regular mb-10 text-[#ff5317]"}>REGISTER</h1>
 
             <form
                 onSubmit={handleSubmit}
@@ -49,6 +45,21 @@ export default function LoginPage(){
                         id={"username"}
                         name={"username"}
                         value={formData.username}
+                        onChange={handleChange}
+                        className={"w-full p-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-[#ff5317]"}
+                        required
+                    />
+                </div>
+
+                <div className={"mb-5"}>
+                    <label htmlFor="email" className={"block font-semibold mb-1"}>
+                        Email
+                    </label>
+                    <input
+                        type={"email"}
+                        id={"email"}
+                        name={"email"}
+                        value={formData.email}
                         onChange={handleChange}
                         className={"w-full p-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-[#ff5317]"}
                         required
@@ -74,7 +85,7 @@ export default function LoginPage(){
                     type={"submit"}
                     className={"w-full py-2 bg-[#ff5317] text-white font-semibold rounded-md hover:bg-[#e44b15] transition-all"}
                 >
-                    Login
+                    Create Account
                 </button>
 
                 {message && (
@@ -83,12 +94,12 @@ export default function LoginPage(){
             </form>
 
             <p className="mt-4 text-sm text-gray-600">
-                Don't have an account?{" "}
+                Already have an account?{" "}
                 <button
-                    onClick={() => navigate("/register")}
+                    onClick={() => navigate("/login")}
                     className="text-[#ff5317] font-semibold hover:underline"
                 >
-                    Register
+                    Log in
                 </button>
             </p>
         </section>

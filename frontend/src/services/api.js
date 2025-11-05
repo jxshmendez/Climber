@@ -1,19 +1,26 @@
-const API_BASE_URL = "/api"
+import axios from "axios"
 
-export async function getGyms(){
-    const res = await fetch(`${API_BASE_URL}/gyms`);
-    if(!res.ok) throw new Error("Failed to get gyms.");
-    return await res.json();
-}
+const api = axios.create({
+    baseURL: "/api",
+});
 
-export async function getUsers(){
-    const res = await fetch(`${API_BASE_URL}/users`);
-    if(!res.ok) throw new Error("Failed to get users.");
-    return await res.json();
-}
+api.interceptors.request.use((config) => {
+    const token = localStorage.getItem("token");
+    if(token) {
+        config.headers.Authorization = `Bearer ${token}`;
+    }
+    return config;
+});
 
-export async function getRoute(){
-    const res = await fetch(`${API_BASE_URL}/routes`);
-    if(!res.ok) throw new Error("Failed to get route.");
-    return await res.json();
-}
+api.interceptors.response.use(
+    (response) => response,
+    (error) => {
+        if(error.response && error.response.status === 401){
+            localStorage.removeItem("token");
+            window.location.href = "/login";
+        }
+        return Promise.reject(error);
+    }
+);
+
+export default api;
