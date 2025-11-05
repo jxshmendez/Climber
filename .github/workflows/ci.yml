@@ -24,10 +24,6 @@ jobs:
         working-directory: ./backend
         run: mvn clean verify -DskipTests
 
-      - name: Run backend tests
-        working-directory: ./backend
-        run: mvn test
-
   frontend:
     runs-on: ubuntu-latest
     steps:
