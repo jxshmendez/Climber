@@ -19,9 +19,9 @@ export default function Navbar() {
 
                 <div className="flex justify-end min-w-[8rem]">
                     <NavLink
-                        to="/waitlist"
+                        to="/register"
                         className="bg-[#ff5317] text-black px-4 py-1.5 rounded-md hover:bg-[#FFDEAD] transition">
-                        Waitlist
+                        JOIN
                     </NavLink>
                 </div>
             </div>
