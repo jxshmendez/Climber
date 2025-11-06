@@ -14,6 +14,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
+/**
+ * Handles all operations related to Users
+ */
 @Service
 public class UserService {
 
