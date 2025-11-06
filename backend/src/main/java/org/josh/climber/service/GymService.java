@@ -11,6 +11,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * Handles all operations related to Gyms
+ */
 @Service
 public class GymService {
 
