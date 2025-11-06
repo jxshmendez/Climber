@@ -9,7 +9,8 @@
 
 # Roadmap
 ![Roadmap 1](./diagrams/Roadmap-1.png)
-### Last updated: 06/11/2025
+### Current: Stage 2
+#### Last updated: 06/11/2025
 
 # Database
 ### Below is the current ERD for the Climber database schema:
