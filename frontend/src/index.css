@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Anton+SC&family=Noto+Sans+Display:ital,wght@0,100..900;1,100..900&family=Trade+Winds&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Anton+SC&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Noto+Sans+Display:ital,wght@0,100..900;1,100..900&family=Trade+Winds&display=swap');
 @import "tailwindcss";
 
 
@@ -21,6 +21,13 @@
     font-style: normal;
     font-variation-settings:"wdth" 100;
 }
+
+.inter {
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 700;
+    font-style: normal;
+        }
 
 ::-webkit-scrollbar {
     display: none;

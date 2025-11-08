@@ -30,7 +30,7 @@ export default function RegisterPage() {
 
     return(
         <section className={"min-h-screen flex flex-col justify-center items-center bg-[#fef6e0] text-black p-6"}>
-            <h1 className={"text-6xl anton-sc-regular mb-10 text-[#ff5317]"}>REGISTER</h1>
+            <h1 className={"text-6xl inter mb-10 text-[#ff5317]"}>REGISTER</h1>
 
             <form
                 onSubmit={handleSubmit}

@@ -26,7 +26,7 @@ export default function HomePage() {
                 </div>
                 </section>
 
-            <section className="min-h-screen bg-[#101820] flex items-center justify-center relative">
+            <section className="min-h-screen bg-[#101820] flex items-center justify-center">
                 <h2 className="text-5xl font-bold text-white" id="trackText">
                     <span className="inline-block mr-2">Track,</span>
                     <span className="inline-block mr-2">Connect.</span>
