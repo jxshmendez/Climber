@@ -41,6 +41,11 @@ public class PostsModel {
     @Builder.Default
     @OneToMany(mappedBy = "posts", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference
+    private List<PostCommentsModel> postComments = new ArrayList<>();
+
+    @Builder.Default
+    @OneToMany(mappedBy = "posts", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
     private List<PostLikesModel> postLikes = new ArrayList<>();
 
     @JsonBackReference("session-posts")
