@@ -3,6 +3,8 @@ export interface UserPreviewDTO {
     username: string;
     bio: string;
     avatarUrl: string;
+    followingCount: number;
+    followerCount: number;
 }
 
 /*
@@ -10,5 +12,7 @@ export interface UserPreviewDTO {
     Long userId,
     String username,
     String bio,
-    String avatarUrl
- */
+    String avatarUrl,
+    Integer followingCount,
+    Integer followerCount
+*/

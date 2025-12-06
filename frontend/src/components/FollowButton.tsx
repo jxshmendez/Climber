@@ -6,9 +6,10 @@ import { FollowDTO } from "../types/FollowDTO";
 
 interface FollowButtonProps {
     targetUserId: number;
+    onChange?: () => void;
 }
 
-export default function FollowButton({targetUserId}: FollowButtonProps) {
+export default function FollowButton({targetUserId, onChange}: FollowButtonProps) {
     const [isFollowing, setIsFollowing] = useState<boolean>(false);
     const [loading, setLoading] = useState<boolean>(true);
     const [userId, setUserId] = useState<number | null>(null);
@@ -31,7 +32,7 @@ export default function FollowButton({targetUserId}: FollowButtonProps) {
                 const token = localStorage.getItem("token");
 
                 const res = await axios.get<FollowDTO[]>(
-                    `/api/follows/users/${userId}/following`,
+                    `/api/follow/users/${userId}/following`,
                     {
                         headers: { Authorization: `Bearer ${token}` }
                     }
@@ -64,6 +65,7 @@ export default function FollowButton({targetUserId}: FollowButtonProps) {
             );
 
             setIsFollowing(true);
+            onChange && onChange();
         } catch (error) {
             console.error("Failed to follow user:", error);
         }
@@ -81,6 +83,7 @@ export default function FollowButton({targetUserId}: FollowButtonProps) {
             );
 
             setIsFollowing(false);
+            onChange && onChange();
         } catch(error) {
             console.error("Failed to unfollow user:", error);
         }
