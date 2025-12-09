@@ -37,26 +37,28 @@ export default function UserProfilePage() {
     if(!user) return <p>User not found</p>;
 
     return (
-        <div className={"max-w-xl mx_auto p-4 space-y-4"}>
-            <div className={"flex items-center gap-4"}>
-                <img
-                    src={user.avatarUrl || "/default-avatar.png"}
-                    alt={user.username}
-                    className={"w-20 h-20 rounded-full object-cover"}
-                />
-
-                <div className={"flex-1"}>
-                    <h1 className={"text-2xl font-bold"}>{user.username}</h1>
-                    <p className={"text-gray-600"}>{user.bio || "Empty"}</p>
-                    <p>Followers: {user.followerCount}</p>
-                    <p>Following: {user.followingCount}</p>
-                </div>
-
-                <FollowButton
-                    targetUserId={user.userId}
-                    onChange={loadUser}
-                />
+        <div className={"flex flex-col items-center justify-center pt-4"}>
+            <img
+                src={user.avatarUrl || "/public/chicken.png"}
+                alt={user.username}
+                className={"w-20 h-20 rounded-full object-cover"}
+            />
+            <div className="items-center flex-1">
+                <h1 className="text-2xl font-bold">@{user.username}</h1>
             </div>
+
+            <div className="flex items-center gap-4">
+                <p className="text-gray-600">{user.bio || "Empty"}</p>
+            </div>
+
+            <div className="flex items-center gap-4 pb-4">
+                <p>Followers: {user.followerCount}</p>
+                <p>Following: {user.followingCount}</p>
+            </div>
+            <FollowButton
+                targetUserId={user.userId}
+                onChange={loadUser}
+            />
         </div>
     );
 }

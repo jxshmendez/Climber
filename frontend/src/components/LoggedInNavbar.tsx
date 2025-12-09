@@ -23,7 +23,8 @@ export default function LoggedInNavbar() {
                 {userId && (
                     <a
                         href={`/users/${userId}`}
-                        className={"hover:underline"}
+                        className={"mr-4 hover:underline"}
+
                         >
                         Profile
                     </a>
