@@ -3,11 +3,21 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import FollowButton from "../components/FollowButton";
 import { UserPreviewDTO } from "../types/UserPreviewDTO";
+import UpdatedBioButton from "../components/UpdateBioButton";
+import { jwtDecode} from "jwt-decode";
+import { JwtPayload } from "../types/JwtPayload";
+
 
 export default function UserProfilePage() {
     const {userId} = useParams();
     const [user, setUser] = useState<UserPreviewDTO | null>(null);
     const [loading, setLoading] = useState(true);
+    const [bio, setBio] = useState("...");
+
+    const token = localStorage.getItem("token");
+    const activeUserId = token
+        ? jwtDecode<JwtPayload>(token).userId
+        : null;
 
     async function loadUser() {
         try {
@@ -36,10 +46,12 @@ export default function UserProfilePage() {
 
     if(!user) return <p>User not found</p>;
 
+    const isOwnProfile = activeUserId === user.userId;
+
     return (
         <div className={"flex flex-col items-center justify-center pt-4"}>
             <img
-                src={user.avatarUrl || "/public/chicken.png"}
+                src={user.avatarUrl || "/chicken.png"}
                 alt={user.username}
                 className={"w-20 h-20 rounded-full object-cover"}
             />
@@ -59,6 +71,16 @@ export default function UserProfilePage() {
                 targetUserId={user.userId}
                 onChange={loadUser}
             />
+            {isOwnProfile && (
+                <UpdatedBioButton
+                    currentBio={user.bio || ""}
+                    onUpdated={(newBio) =>
+                        setUser((prev) =>
+                            prev ? { ...prev, bio: newBio } : prev
+                        )
+                    }
+                />
+            )}
         </div>
     );
 }

@@ -17,7 +17,7 @@ export default function LoggedInNavbar() {
 
     return (
         <nav className="flex justify-between items-center p-4 bg-[#ff5317] text-white">
-            <h1 className="text-2xl font-bold ">WALL</h1>
+            <a href={"/dashboard"} className="text-2xl font-bold ">WALL</a>
             <div>
                 <a href="/dashboard" className="mr-4 hover:underline">Dashboard</a>
                 {userId && (
