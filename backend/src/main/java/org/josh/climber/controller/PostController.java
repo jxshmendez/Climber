@@ -1,4 +1,4 @@
-package org.josh.climber.controller.posts;
+package org.josh.climber.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.josh.climber.DTO.posts.PostDTO;
